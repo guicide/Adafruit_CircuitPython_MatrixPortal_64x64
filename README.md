@@ -1,4 +1,4 @@
-# Adafruit_CircuitPython_MatrixPortal_64x64
+# Adafruit CircuitPython MatrixPortal 64x64
 CircuitPython samples for using MatrixPortal on 64x64 and 32x32 LED displays.
 <br>
 These sample files mostly demonstrate one aspect of Matrix Portal M4 programming.<br>
