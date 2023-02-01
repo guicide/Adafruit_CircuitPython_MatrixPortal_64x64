@@ -4,10 +4,8 @@
 #
 # Modified 2023-01-31 by guicide
 # Works on 64x64 and 32x32 LED Matrices
-# This example uses two bitmaps, so the display is not updated until
-# the other bitmap is made "active"
-# See the "single bitmap" example to see the display
-# update as the bitmap is changed.
+# This example uses one bitmap, so the display is updated when any pixel is changed
+# See the "alternating bitmaps" example to see the display update after the bitmap is changed.
 
 SIXTYFOUR = True  # set to False for 32x32
 COLORS = 8
