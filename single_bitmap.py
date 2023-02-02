@@ -6,6 +6,8 @@
 # Works on 64x64 and 32x32 LED Matrices
 # This example uses one bitmap, so the display is updated when any pixel is changed
 # See the "alternating bitmaps" example to see the display update after the bitmap is changed.
+# with one bitmap:  161 redraws per minute (107 if bit_depth = 3)
+# with two bitmaps: 291 redraws per minute (244 if bit_depth = 3)
 
 SIXTYFOUR = True  # set to False for 32x32
 COLORS = 8
@@ -15,6 +17,7 @@ import board
 import displayio
 import framebufferio
 import rgbmatrix
+from rtc import RTC
 
 displayio.release_displays()
 
@@ -26,6 +29,7 @@ def randomize(bmp):
             bmp[y * bmp.height + x] = int(random.random() * COLORS)
 
 if SIXTYFOUR:
+    # bit_depth of 1 is about 33% faster than 3
     matrix = rgbmatrix.RGBMatrix(
         width=64, height=64, bit_depth=1,
         rgb_pins=[board.MTX_R1, board.MTX_G1, board.MTX_B1,
@@ -73,5 +77,7 @@ lp = 0 # just an FYI counter
 
 while True:
     lp += 1
-    print("lp ", lp)
+    ts = RTC().datetime
+    if lp % 10 == 1:
+        print("lp ", lp, ts.tm_min, ts.tm_sec)
     randomize(b1) # randomly fill the bitmap

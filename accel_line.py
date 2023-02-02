@@ -69,6 +69,7 @@ display = framebufferio.FramebufferDisplay(matrix, auto_refresh=True)
 
 print("Display is ", display.width, "x", display.height)
 # create the only bitmap this example needs
+global b1
 b1 = displayio.Bitmap(display.width, display.height, COLORS)
 # create a palette with the same number of colors
 palette = displayio.Palette(COLORS)

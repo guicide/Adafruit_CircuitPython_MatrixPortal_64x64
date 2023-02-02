@@ -8,6 +8,8 @@
 # the other bitmap is made "active"
 # See the "single bitmap" example to see the display
 # update as the bitmap is changed.
+# with one bitmap:  161 redraws per minute (107 if bit_depth = 3)
+# with two bitmaps: 291 redraws per minute (244 if bit_depth = 3)
 
 SIXTYFOUR = True  # set to False for 32x32
 COLORS = 8
@@ -17,6 +19,7 @@ import board
 import displayio
 import framebufferio
 import rgbmatrix
+from rtc import RTC
 
 displayio.release_displays()
 
@@ -29,7 +32,7 @@ def randomize(output):
 
 if SIXTYFOUR:
     matrix = rgbmatrix.RGBMatrix(
-        width=64, height=64, bit_depth=1,
+        width=64, height=64, bit_depth=3,
         rgb_pins=[board.MTX_R1, board.MTX_G1, board.MTX_B1,
                   board.MTX_R2, board.MTX_G2, board.MTX_B2],
         addr_pins=[board.MTX_ADDRA, board.MTX_ADDRB, board.MTX_ADDRC,
@@ -77,6 +80,8 @@ lp = 0 # counter (also tells us which bitmap to use)
 
 while True:
     lp += 1 # inc loop counter
-    print("lp ", lp)
+    ts = RTC().datetime
+    if lp % 10 == 1:
+        print("lp ", lp, ts.tm_min, ts.tm_sec)
     randomize(b[lp & 1]) # randomly fill a bitmap
     display.show(g[lp & 1]) # show a bitmap

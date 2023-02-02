@@ -216,7 +216,7 @@ print("RTC says:", ts)
 
 if ts.tm_year == 2000: # RTC has not been set
     # reload time from internet
-    text_out(3, "Text...")
+    text_out(4, "Text...")
     print("Fetching text from", TIME_URL)
     r = requests.get(TIME_URL)
     print("-" * 40)
