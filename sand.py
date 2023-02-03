@@ -175,10 +175,13 @@ while True:
     f_x, f_y, f_z = sensor.acceleration
     ax = int(f_x / 2)  # f_x >> 8                      # Transform accelerometer axes
     ay = int(f_y / 2)  # f_y >> 8                      # to grain coordinate space
-    az = abs(int(f_y / 10))  # abs(f_z) >> 11                # Random motion factor
-    az = 1 if (az >= 3) else (4 - az)  # Clip & invert
-    ax -= az                           # Subtract motion factor from X, Y
-    ay -= az
+    print(ax, ay)
+
+#    az = abs(int(f_y / 10))  # abs(f_z) >> 11                # Random motion factor
+#    az = 1 if (az >= 3) else (4 - az)  # Clip & invert
+#    ax -= az                           # Subtract motion factor from X, Y
+#    ay -= az
+
 #    az2 = (az << 1) + 1         # Range of random motion to add back in
 #    az2 = random.randint(10, 12)
 #    print(ax, ay, az, az2)
@@ -187,8 +190,8 @@ while True:
     v2 = 0                      # Velocity squared
     v = 0.0                     # Absolute velociy
     for g in grains:
-        g.vx += ax + random.randint(0, 9)  # A little randomness makes
-        g.vy += ay + random.randint(0, 9)  # tall stacks topple better!
+        g.vx += ax + random.randint(-5, 5)  # A little randomness makes
+        g.vy += ay + random.randint(-5, 5)  # tall stacks topple better!
 
         # Terminal velocity (in any direction) is 256 units -- equal to
         # 1 pixel -- which keeps moving grains from passing through each other
