@@ -20,17 +20,11 @@ COLORS = 4
 
 import board
 import busio
-from digitalio import DigitalInOut
-import adafruit_requests as requests
-import adafruit_esp32spi.adafruit_esp32spi_socket as socket
-from adafruit_esp32spi import adafruit_esp32spi
 import adafruit_display_text.label
 import displayio
 import framebufferio
 import rgbmatrix
 import terminalio
-import time
-import json
 from rtc import RTC
 import adafruit_lsm303_accel
 
@@ -130,4 +124,3 @@ while True:
     TEXT_X.text = "x:" + str(round(f_x, 2))
     TEXT_Y.text = "y:" + str(round(f_y, 2))
     plot(f_x, f_y)
-    time.sleep(0.25)
